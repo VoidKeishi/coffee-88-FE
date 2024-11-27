@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import './header.css';
 import ShopInfoCard from "../shop-info-card/ShopInfoCard";
 
-const Header = () => {
-  // State to toggle coffee shop information visibility
+const Header = ({ products }) => {
   const [showCoffeeShopInfo, setShowCoffeeShopInfo] = useState(false);
 
-  // Handle the toggle for showing coffee shop info
   const handleToggleCoffeeShopInfo = () => {
     setShowCoffeeShopInfo(!showCoffeeShopInfo);
   };
@@ -27,17 +25,9 @@ const Header = () => {
       <i className="fa-solid fa-bars"></i>
       {showCoffeeShopInfo && (
         <div className="shop-lists">
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
-          <ShopInfoCard />
+          {products.map((product, index) => (
+            <ShopInfoCard key={index} product={product} />
+          ))}
         </div>
       )}
     </header>
