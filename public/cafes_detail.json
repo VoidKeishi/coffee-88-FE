@@ -1,0 +1,303 @@
+{
+    "id": 1,
+    "name": "Secret Garden Cafe",
+    "address": "Lô 39 (TT4) đường đỗ đình thiện Khu đô thị mới Mỹ Đình - Mễ Trì, P. Mỹ Đình 1, Nam Từ Liêm, 100000, Việt Nam",
+    "image_urls": [
+      "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721496/Picture4_plm7af.png"
+    ],
+    "price_range": "medium",
+    "style": "vintage",
+    "google_rating": "4.5",
+    "opening_time": "09:00:00",
+    "closing_time": "23:00:00",
+    "distance_from_sun": "0.60",
+    "drinks": [
+      {
+        "id": 1,
+        "name": "ESPRESSO",
+        "type": "coffee",
+        "price": "50000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 2,
+        "name": "AMERICANO",
+        "type": "coffee",
+        "price": "50000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 3,
+        "name": "COFFEE LATTE",
+        "type": "coffee",
+        "price": "65000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 4,
+        "name": "CAPUCHINO",
+        "type": "coffee",
+        "price": "68000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 5,
+        "name": "COCONUT COFFEE",
+        "type": "coffee",
+        "price": "65000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 6,
+        "name": "CHOCOLATE COFFEE",
+        "type": "coffee",
+        "price": "68000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 7,
+        "name": "AVOCADO COFFEE",
+        "type": "coffee",
+        "price": "68000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 8,
+        "name": "DETOX JUICE (CURLY KALE + CARROT + CUCUMBER + APPLE)",
+        "type": "juice",
+        "price": "79000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 9,
+        "name": "DETOX VITAMIN (CURLY KALE + CARROT + ORANGE + PINEAPPLE)",
+        "type": "juice",
+        "price": "79000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 10,
+        "name": "JASMINE TEA",
+        "type": "tea",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 11,
+        "name": "LEMON TEA",
+        "type": "tea",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 12,
+        "name": "GREEN TEA",
+        "type": "tea",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 13,
+        "name": "VOI TEA",
+        "type": "tea",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 14,
+        "name": "GINGER TEA",
+        "type": "tea",
+        "price": "65000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 15,
+        "name": "COCOA",
+        "type": "tea",
+        "price": "55000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 16,
+        "name": "PINEAPPLE JUICE",
+        "type": "juice",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 17,
+        "name": "CARROT JUICE",
+        "type": "juice",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 18,
+        "name": "WATERMELON JUICE",
+        "type": "juice",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 19,
+        "name": "ORANGE JUICE",
+        "type": "juice",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 20,
+        "name": "PASSION FRUIT JUICE",
+        "type": "juice",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 21,
+        "name": "COCONUT JUICE",
+        "type": "juice",
+        "price": "60000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 22,
+        "name": "MOJITO",
+        "type": "juice",
+        "price": "98000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 23,
+        "name": "AVOCADO SHAKE",
+        "type": "smoothie",
+        "price": "65000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 24,
+        "name": "MANGO SHAKE",
+        "type": "smoothie",
+        "price": "65000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 25,
+        "name": "BANANA SHAKE",
+        "type": "smoothie",
+        "price": "65000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      },
+      {
+        "id": 26,
+        "name": "LEMON SHAKE",
+        "type": "smoothie",
+        "price": "65000.00",
+        "description": null,
+        "image_url": null,
+        "is_available": true,
+        "created_at": "2024-11-27T18:28:00.994Z",
+        "updated_at": "2024-11-27T18:28:00.994Z"
+      }
+    ]
+}
+  

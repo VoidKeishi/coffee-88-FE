@@ -1,0 +1,156 @@
+[
+    {
+      "id": 1,
+      "name": "Secret Garden Cafe",
+      "address": "Lô 39 (TT4) đường đỗ đình thiện Khu đô thị mới Mỹ Đình - Mễ Trì, P. Mỹ Đình 1, Nam Từ Liêm, 100000, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721496/Picture4_plm7af.png"
+      ],
+      "price_range": "medium",
+      "style": "vintage",
+      "google_rating": "4.5",
+      "opening_time": "09:00:00",
+      "closing_time": "23:00:00",
+      "distance_from_sun": "0.60"
+    },
+    {
+      "id": 2,
+      "name": "Adogen Cafe",
+      "address": "Lo 15 TT4, P. Trần Văn Lai, Mỹ Đình, song da, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721495/Picture5_pi2yrn.png"
+      ],
+      "price_range": "medium",
+      "style": "modern",
+      "google_rating": "4.4",
+      "opening_time": "08:00:00",
+      "closing_time": "23:00:00",
+      "distance_from_sun": "0.80"
+    },
+    {
+      "id": 3,
+      "name": "Cafe Alex",
+      "address": "2Q8G+8F8, 106 TT3, Mỹ Đình, Nam Từ Liêm, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721496/Picture6_udc8b7.png"
+      ],
+      "price_range": "high",
+      "style": "modern",
+      "google_rating": "4.7",
+      "opening_time": "07:00:00",
+      "closing_time": "23:00:00",
+      "distance_from_sun": "1.10"
+    },
+    {
+      "id": 4,
+      "name": "Cafe Vũ",
+      "address": "Mễ Trì Hạ, Nam Từ Liêm, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721496/Picture7_xd1wfi.png"
+      ],
+      "price_range": "medium",
+      "style": "outdoor",
+      "google_rating": "4.0",
+      "opening_time": "07:00:00",
+      "closing_time": "23:00:00",
+      "distance_from_sun": "0.27"
+    },
+    {
+      "id": 5,
+      "name": "Vinh Cafe",
+      "address": "Lô BT1-35, Khu đô thị Mễ Trì Hạ, Nam Từ Liêm, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721498/Picture8_hfin3w.png"
+      ],
+      "price_range": "medium",
+      "style": "traditional",
+      "google_rating": "4.0",
+      "opening_time": "07:00:00",
+      "closing_time": "23:00:00",
+      "distance_from_sun": "0.30"
+    },
+    {
+      "id": 6,
+      "name": "Cafe Sài Gòn",
+      "address": "Khu đô thị Mễ Trì Hạ, Nam Từ Liêm, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721499/Picture9_h4sjuo.png"
+      ],
+      "price_range": "high",
+      "style": "outdoor",
+      "google_rating": "4.7",
+      "opening_time": "07:00:00",
+      "closing_time": "23:30:00",
+      "distance_from_sun": "0.60"
+    },
+    {
+      "id": 7,
+      "name": "Café de Măng Đen Nguyễn Chánh",
+      "address": "126 P. Nguyễn Chánh, Yên Hoà, Cầu Giấy, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721499/Picture10_ft5pmg.png"
+      ],
+      "price_range": "medium",
+      "style": "modern",
+      "google_rating": "4.5",
+      "opening_time": "07:00:00",
+      "closing_time": "22:00:00",
+      "distance_from_sun": "0.85"
+    },
+    {
+      "id": 8,
+      "name": "Coffee Quân",
+      "address": "Yên Hoà, Cầu Giấy, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721498/Picture11_cjwdb3.png"
+      ],
+      "price_range": "medium",
+      "style": "vintage",
+      "google_rating": "4.3",
+      "opening_time": "06:30:00",
+      "closing_time": "23:00:00",
+      "distance_from_sun": "2.20"
+    },
+    {
+      "id": 9,
+      "name": "Mơ Cà phê",
+      "address": "2 Đ. Trung Yên 10A, Yên Hoà, Cầu Giấy, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721500/Picture12_dqve8r.png"
+      ],
+      "price_range": "high",
+      "style": "modern",
+      "google_rating": "4.6",
+      "opening_time": "07:00:00",
+      "closing_time": "03:00:00",
+      "distance_from_sun": "2.70"
+    },
+    {
+      "id": 10,
+      "name": "La Jolie Café",
+      "address": "28 Ngõ 62 Nguyễn Chí Thanh, Láng Thượng, Đống Đa, Hà Nội 00120, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721495/Picture13_bjuhqc.png"
+      ],
+      "price_range": "medium",
+      "style": "modern",
+      "google_rating": "4.3",
+      "opening_time": "08:00:00",
+      "closing_time": "22:30:00",
+      "distance_from_sun": "4.20"
+    },
+    {
+      "id": 11,
+      "name": "Gosiwon Coffee In Bed",
+      "address": "18 Ngõ 34 Nguyễn Thị Định, Trung Hoà, Cầu Giấy, Hà Nội, Việt Nam",
+      "image_urls": [
+        "https://res.cloudinary.com/ddfbcat7h/image/upload/v1732721496/Picture14_h9hrqx.png"
+      ],
+      "price_range": "low",
+      "style": "workspace",
+      "google_rating": "4.6",
+      "opening_time": "09:00:00",
+      "closing_time": "23:30:00",
+      "distance_from_sun": "3.60"
+    }
+]
