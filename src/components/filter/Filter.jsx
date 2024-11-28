@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
 import './filter.css';
 
-const Filter = () => {
+const Filter = ({ onApplyFilters }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedDistance, setSelectedDistance] = useState('');
 
   const handleDropdownToggle = () => {
     setDropdownVisible(!isDropdownVisible);
   };
 
+  const handleDistanceChange = (value) => {
+    setSelectedDistance((prev) => (prev === value ? '' : value)); // Deselect if already selected
+  };
+
+  const handleApplyFilters = () => {
+    onApplyFilters({ distance: selectedDistance });
+  };
+
   return (
     <div className="filter-container">
       <button className="filter-button" onClick={handleDropdownToggle}>
-        <i class="fa-solid fa-sliders"></i> Bộ lọc
+        <i className="fa-solid fa-sliders"></i> Bộ lọc
       </button>
 
       <div className={`filter-dropdown ${isDropdownVisible ? 'show' : ''}`}>
         <p>Đồ uống</p>
-        <div className='dropdown-item'>
+        <div className="dropdown-item">
           <label>
             <input
               type="checkbox"
@@ -40,37 +49,47 @@ const Filter = () => {
           </label>
         </div>
         <p>Khoảng cách</p>
-        <div className='dropdown-item'>
+        <div className="dropdown-item">
           <label>
             <input
               type="checkbox"
-              name="filter1"
+              name="distance"
+              checked={selectedDistance === 'under-1'}
+              onChange={() => handleDistanceChange('under-1')}
             />
             Dưới 1km
           </label>
           <label>
             <input
               type="checkbox"
-              name="filter2"
+              name="distance"
+              checked={selectedDistance === '1-3'}
+              onChange={() => handleDistanceChange('1-3')}
             />
             1-3 km
           </label>
           <label>
             <input
               type="checkbox"
-              name="filter3"
+              name="distance"
+              checked={selectedDistance === '3-5'}
+              onChange={() => handleDistanceChange('3-5')}
             />
             3-5 km
           </label>
           <label>
             <input
               type="checkbox"
-              name="filter3"
+              name="distance"
+              checked={selectedDistance === 'above-5'}
+              onChange={() => handleDistanceChange('above-5')}
             />
             Trên 5km
           </label>
         </div>
-
+        <button className="filter-button" onClick={handleApplyFilters}>
+          Apply Filters
+        </button>
       </div>
     </div>
   );
