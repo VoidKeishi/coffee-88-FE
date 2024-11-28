@@ -23,25 +23,30 @@ function App() {
 
   const applyFilters = (filters) => {
     let filtered = [...products];
-
-    if (filters.distance) {
+  
+    if (filters.distance_from_sun && filters.distance_from_sun.length > 0) {
       const distanceRange = {
         "under-1": [0, 1],
         "1-3": [1, 3],
         "3-5": [3, 5],
         "above-5": [5, Infinity],
       };
-
-      const [min, max] = distanceRange[filters.distance];
-      filtered = filtered.filter(
-        (product) =>
-          parseFloat(product.distance_from_sun) >= min &&
-          parseFloat(product.distance_from_sun) < max
-      );
+  
+      // Filter by selected distances
+      filtered = filtered.filter((product) => {
+        const distance = parseFloat(product.distance_from_sun);
+        
+        // Check if the product's distance is in any of the selected ranges
+        return filters.distance_from_sun.some((range) => {
+          const [min, max] = distanceRange[range];
+          return distance >= min && distance < max;
+        });
+      });
     }
-
+  
     setFilteredProducts(filtered);
   };
+  
 
   return (
     <div className="App">

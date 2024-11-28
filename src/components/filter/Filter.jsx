@@ -3,18 +3,24 @@ import './filter.css';
 
 const Filter = ({ onApplyFilters }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [selectedDistance, setSelectedDistance] = useState('');
+  const [selectedDistances, setSelectedDistances] = useState([]); // Store multiple selected distances
 
   const handleDropdownToggle = () => {
     setDropdownVisible(!isDropdownVisible);
   };
 
   const handleDistanceChange = (value) => {
-    setSelectedDistance((prev) => (prev === value ? '' : value)); // Deselect if already selected
+    setSelectedDistances((prev) => {
+      if (prev.includes(value)) {
+        return prev.filter((distance) => distance !== value);
+      } else {
+        return [...prev, value];
+      }
+    });
   };
 
   const handleApplyFilters = () => {
-    onApplyFilters({ distance: selectedDistance });
+    onApplyFilters({ distance_from_sun: selectedDistances });
   };
 
   return (
@@ -27,34 +33,26 @@ const Filter = ({ onApplyFilters }) => {
         <p>Đồ uống</p>
         <div className="dropdown-item">
           <label>
-            <input
-              type="checkbox"
-              name="filter1"
-            />
+            <input type="checkbox" name="filter1" />
             Cà phê
           </label>
           <label>
-            <input
-              type="checkbox"
-              name="filter2"
-            />
+            <input type="checkbox" name="filter2" />
             Nước ép
           </label>
           <label>
-            <input
-              type="checkbox"
-              name="filter3"
-            />
+            <input type="checkbox" name="filter3" />
             Trà sữa
           </label>
         </div>
+
         <p>Khoảng cách</p>
         <div className="dropdown-item">
           <label>
             <input
               type="checkbox"
               name="distance"
-              checked={selectedDistance === 'under-1'}
+              checked={selectedDistances.includes('under-1')}
               onChange={() => handleDistanceChange('under-1')}
             />
             Dưới 1km
@@ -63,7 +61,7 @@ const Filter = ({ onApplyFilters }) => {
             <input
               type="checkbox"
               name="distance"
-              checked={selectedDistance === '1-3'}
+              checked={selectedDistances.includes('1-3')}
               onChange={() => handleDistanceChange('1-3')}
             />
             1-3 km
@@ -72,7 +70,7 @@ const Filter = ({ onApplyFilters }) => {
             <input
               type="checkbox"
               name="distance"
-              checked={selectedDistance === '3-5'}
+              checked={selectedDistances.includes('3-5')}
               onChange={() => handleDistanceChange('3-5')}
             />
             3-5 km
@@ -81,7 +79,7 @@ const Filter = ({ onApplyFilters }) => {
             <input
               type="checkbox"
               name="distance"
-              checked={selectedDistance === 'above-5'}
+              checked={selectedDistances.includes('above-5')}
               onChange={() => handleDistanceChange('above-5')}
             />
             Trên 5km
