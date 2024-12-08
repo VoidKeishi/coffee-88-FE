@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.login-left {
+    flex: 1;
+    background-image: url('../coffee2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+.login-right {
+    flex: 1;
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+.login-right h1 {
+    font-size: 2.5rem;
+    margin-top: 20px;
+    font-weight: 600;
+    margin-bottom: -15px;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input {
+    margin-bottom: 20px;
+    padding: 14px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.password-input {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.password-input input {
+    margin-bottom: 0;
+}
+
+.password-input span {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    gap: 8px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #bfbfbf;
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"]:hover {
+    accent-color: #777777;
+}
+
+.forgot-password {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.login-button {
+    padding: 15px 30px;
+    font-size: 1.2rem !important;
+    color: #fff !important;
+    background-color: #4f4f4f !important;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 200px;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button:hover {
+    background-color: #1c1c1c !important;
+    transform: scale(1.05);
+}
+
+.signup-link {
+    text-align: center;
+    color: #555;
+}
+
+.signup-link a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+.register-container {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  .register-left {
+    flex: 1;
+    background-image: url('../coffee2.jpg'); /* Replace with the correct path to the image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .register-right {
+    flex: 1;
+    padding: 40px 80px 40px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Đặt các phần tử lên đầu */
+    background-color: #fff;
+    overflow-y: auto;
+  }
+  
+  .register-right h1 {
+    font-size: 2.5rem;
+    margin-top: 20px;
+    font-weight: 600;
+    margin-bottom: -10px;
+  }
+  
+  .register-right p {
+    margin-bottom: 30px;
+    color: #555;
+  }
+  
+  .register-right a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .register-right a:hover {
+    text-decoration: underline;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 45px;
+  }
+  
+  .form-group label {
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 0.9rem;
+  }
+  
+  .register-form input {
+    margin-bottom: 15px;
+    padding: 14px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    gap: 10px;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 4px;
+    accent-color: #bfbfbf;
+    cursor: pointer;
+  }
+  
+  .checkbox-container input[type="checkbox"]:hover {
+    accent-color: #777777;
+  }
+  
+  .checkbox-container input[type="checkbox"]:hover + label {
+    color: #777777;
+  }
+  
+  .checkbox-container label {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  
+  
+  .register-button {
+    margin-top: 10px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: #4f4f4f;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 160px;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .register-button:hover {
+    background-color: #1c1c1c;
+    transform: scale(1.05);
+  }
+  
+  .register-right p:last-child {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #777;
+  }
+  
+  .password-input {
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
+  .password-input input {
+    margin-bottom: 0;
+  }
+  
+  .password-input span {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-input span:hover {
+    color: #007bff;
+  }
+  
+  .register-right p:first-of-type a {
+    font-weight: 600;
+  }
+  
+  .register-right p:last-child a {
+    font-weight: 600;
+  }
