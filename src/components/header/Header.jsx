@@ -1,47 +1,65 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FaSearch, FaUserCircle, FaGlobe, FaCaretDown } from 'react-icons/fa';
 import './header.css';
-import ShopInfoCard from '../shop-info-card/ShopInfoCard';
 
-const Header = ({ products }) => {
-    const [showCoffeeShopInfo, setShowCoffeeShopInfo] = useState(false);
-    const navigate = useNavigate();
+const Header = () => {
+    const [showLanguages, setShowLanguages] = useState(false);
+    const [selectedLang, setSelectedLang] = useState('VN');
 
-    const handleToggleCoffeeShopInfo = () => {
-        setShowCoffeeShopInfo(!showCoffeeShopInfo);
-    };
+    const languages = [
+        { code: 'VN', flag: '/vn-flag.png', name: 'Tiếng Việt' },
+        { code: 'EN', flag: '/en-flag.jpg', name: 'English' },
+        { code: 'JP', flag: '/jp-flag.png', name: '日本語' }
+    ];
 
-    const handleLoginClick = () => {
-        navigate('/login');
+    const handleLanguageSelect = (langCode) => {
+        setSelectedLang(langCode);
+        setShowLanguages(false);
     };
 
     return (
         <header className="header">
-            <div className="logo">Logo</div>
+            <div className="logo">
+                <img src="/logo.jpg" alt="Logo" />
+            </div>
 
             <div className="search-bar">
-                <div className="search-input">
-                    <input type="text" placeholder="Tìm kiếm" />
-                    <input type="text" placeholder="Vị trí của bạn" />
-                    <i className="fa fa-search"></i>
+                <input type="text" placeholder="Tìm kiếm..." />
+                <div className="search-icon">
+                    <FaSearch />
                 </div>
-                <img src="/assets/image/list-logo.png" alt="list logo" onClick={handleToggleCoffeeShopInfo} />
             </div>
 
             <div className="header-actions">
-                <button className="login-button" onClick={handleLoginClick}>
-                    <i className="fas fa-user"></i> Đăng nhập
-                </button>
-                <i className="fa-solid fa-bars"></i>
-            </div>
-
-            {showCoffeeShopInfo && (
-                <div className="shop-lists">
-                    {products.map((product, index) => (
-                        <ShopInfoCard key={index} product={product} />
-                    ))}
+                <div className="language-selector">
+                    <div 
+                        className="selected-language" 
+                        onClick={() => setShowLanguages(!showLanguages)}
+                    >
+                        <FaGlobe />
+                        <span>{selectedLang}</span>
+                        <FaCaretDown />
+                    </div>
+                    
+                    {showLanguages && (
+                        <div className="language-dropdown">
+                            {languages.map((lang) => (
+                                <div
+                                    key={lang.code}
+                                    className="language-option"
+                                    onClick={() => handleLanguageSelect(lang.code)}
+                                >
+                                    <img src={lang.flag} alt={lang.name} />
+                                    <span>{lang.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-            )}
+                <div className="user-avatar">
+                    <FaUserCircle />
+                </div>
+            </div>
         </header>
     );
 };
