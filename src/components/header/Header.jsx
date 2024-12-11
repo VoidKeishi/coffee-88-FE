@@ -96,11 +96,11 @@ const Header = () => {
       </div>
 
       <div className="flag-container" onClick={handleFlagChange}>
-        <img
-          src={`assets/image/${currentFlag}.png`}
-          alt={currentFlag}
-          className="flag-icon"
-        />
+          <img
+            src={`/assets/image/${currentFlag}.png`}
+            alt={currentFlag}
+            className="flag-icon"
+          />
       </div>
 
       <div className="user-menu" onClick={toggleUserMenu}>
