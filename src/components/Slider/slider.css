@@ -1,66 +1,100 @@
-.slider {
-  position: relative;
-  width: 100%;
-  max-width: 1000px;
-  margin: auto;
-  overflow: hidden;
-  border-radius: 10px;
+#slider-container {
+  position: relative; /* Tạo bối cảnh định vị */
+  width: 100vw;
+  height: 100vh; /* Chiều cao toàn màn hình */
+  overflow: hidden; /* Ngăn phần thừa tràn ra */
+  background: linear-gradient(45deg, 
+    #e6ccb2, /* Màu nâu nhạt */
+    #f5e6d3, /* Màu be nhạt */
+    #efe4d4  /* Màu kem nhạt */
+  );
 }
 
-.slider-wrapper {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+#slider-title {
+  position: relative; /* Định vị tiêu đề bên trong container */
+  padding: 20px 0;
+  text-align: center; /* Canh giữa tiêu đề */
+  font-size: 2.2rem; /* Tăng kích thước chữ */
+  font-weight: bold;
+  color: #8B4513; /* Đổi màu chữ sang nâu đậm để nổi bật trên nền nhạt */
+  font-family: "Bahnschrift", sans-serif;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.2); /* Shadow màu nâu nhạt */
+  margin-bottom: 20px;
 }
 
-.slide {
-  display: flex;
-  justify-content: space-between;
-  flex: 0 0 100%;
-  padding: 0 70px;
-}
-
-.nav-button {
+/* Thêm dots navigation */
+.slider-dots {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent;
-  color: rgb(146, 146, 146);
-  border: none;
-  font-size: 24px;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 1000;
-}
-
-.nav-button.left {
-  left: 10px;
-}
-
-.nav-button.right {
-  right: 10px;
-}
-
-.nav-button:hover {
-  color: #333;
-}
-
-.indicators {
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
+  gap: 12px; /* Tăng khoảng cách giữa các dots */
+  z-index: 10;
 }
 
-.indicator {
-  width: 10px;
-  height: 10px;
-  background-color: #ccc;
+.dot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  margin: 0 5px;
+  background-color: rgba(139, 69, 19, 0.3);
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(139, 69, 19, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.indicator.active {
-  background-color: #333;
+.dot.active {
+  background-color: rgba(139, 69, 19, 0.8);
+  transform: scale(1.3); /* Tăng scale cho dot active */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dot:hover {
+  background-color: rgba(139, 69, 19, 0.6);
+  transform: scale(1.2);
+}
+
+#image-track {
+  display: flex;
+  gap: 5vmin;
+  position: absolute;
+  top: 39%; /* Bắt đầu bên dưới phần tiêu đề */
+  left: 5%;
+  transform: translate(0%, -50%);
+  user-select: none; /* Ngăn chọn ảnh */
+  cursor: grab;
+  transition: transform 0.3s ease; /* Hiệu ứng chuyển động mượt */
+}
+
+#image-track:active {
+  cursor: grabbing;
+}
+
+#image-track > .image {
+  width: 40vmin;
+  height: 56vmin;
+  object-fit: cover;
+  object-position: 100% center;
+  transition: all 0.4s ease;
+  border-radius: 20px; /* Tăng bo góc */
+  box-shadow: 0 10px 35px rgba(139, 69, 19, 0.25); /* Tăng shadow màu nâu */
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  filter: brightness(1.02); /* Tăng độ sáng mặc định */
+}
+
+#image-track > .image:hover {
+  transform: scale(1.05); /* Tăng scale khi hover */
+  filter: brightness(1.1); /* Sáng hơn khi hover */
+  box-shadow: 0 15px 45px rgba(139, 69, 19, 0.35); /* Tăng shadow khi hover */
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Viền rõ hơn khi hover */
+  animation: pulse 2s infinite;
+}
+
+/* Thêm animation cho hover state */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }

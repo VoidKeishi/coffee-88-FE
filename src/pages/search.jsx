@@ -61,7 +61,7 @@ function Search() {
     return (
         <>
             <Header />
-            <div className="search-container">
+            <div className="search-results-container">
                 <div className="search-header">
                     <div className="search-title">
                         <h2>Kết quả tìm kiếm cho từ khóa: <span>"Highland"</span></h2>

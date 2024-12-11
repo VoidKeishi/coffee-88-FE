@@ -1,4 +1,4 @@
-.search-container {
+.search-results-container {
     padding: 20px 40px;
     background-color: #f8f3e9;
     min-height: calc(100vh - 70px);
@@ -200,7 +200,7 @@
 }
 
 @media (max-width: 768px) {
-    .search-container {
+    .search-results-container {
         padding: 15px;
     }
 
