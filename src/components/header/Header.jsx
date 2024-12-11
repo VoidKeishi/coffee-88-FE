@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./header.css";
 import {
   faMagnifyingGlass,
@@ -69,7 +70,9 @@ const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        <img src="assets/image/logo-coffee.png" alt="Logo" />
+        <Link to="/">
+          <img src="/assets/image/logo-coffee.png" alt="Logo" />
+        </Link>
       </div>
 
       <div className="search-container">

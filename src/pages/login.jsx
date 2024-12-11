@@ -3,16 +3,33 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import './login.css';
+import API_BASE_URL from '../apiConfig';
 
 const Login = () => {
-    const [credentials, setCredentials] = useState({ username: '', password: '' });
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add login logic here
-        navigate('/display');
+        try {
+            const response = await fetch(`${API_BASE_URL}auth/sign-in`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(credentials),
+            });
+            if (response.ok) {
+                const data = await response.json();
+                navigate('/display');
+            } else {
+                // Handle login error
+                console.error('Login failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
@@ -22,12 +39,20 @@ const Login = () => {
                 <h1>Login</h1>
                 <p className="subtitle">To access your account</p>
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Username" required />
+                    <input 
+                        type="email" 
+                        placeholder="Email" 
+                        required 
+                        value={credentials.email}
+                        onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+                    />
                     <div className="password-input">
                         <input 
                             type={showPassword ? "text" : "password"} 
                             placeholder="Password" 
                             required 
+                            value={credentials.password}
+                            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                         />
                         <span onClick={() => setShowPassword(!showPassword)}>
                             {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}

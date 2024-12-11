@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { FaStar, FaSort } from 'react-icons/fa';
 import Header from '../components/header/Header';
 import './search.css';
+import { useNavigate } from 'react-router-dom';
 
 function Search() {
     const [showSortOptions, setShowSortOptions] = useState(false);
     const [selectedSort, setSelectedSort] = useState('Liên quan nhất');
+    const navigate = useNavigate();
 
     const sortOptions = [
         'Liên quan nhất',
@@ -58,6 +60,10 @@ function Search() {
         ));
     };
 
+    const handleCafeClick = (cafeId) => {
+        navigate(`/cafe/${cafeId}`);
+    };
+
     return (
         <>
             <Header />
@@ -96,7 +102,12 @@ function Search() {
 
                 <div className="results-grid">
                     {searchResults.map((item) => (
-                        <div key={item.id} className="result-card">
+                        <div 
+                            key={item.id} 
+                            className="result-card"
+                            onClick={() => handleCafeClick(item.id)}
+                            style={{ cursor: 'pointer' }}
+                        >
                             <div className="result-image">
                                 <img src={item.image} alt={item.name} />
                                 <div className="status-badge">{item.status}</div>
@@ -127,4 +138,4 @@ function Search() {
     );
 }
 
-export default Search; 
+export default Search;

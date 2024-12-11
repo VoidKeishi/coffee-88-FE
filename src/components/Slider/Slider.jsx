@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import "./Slider.css";
+import "./slider.css";
 
 const Slider = () => {
   const trackRef = useRef(null);
