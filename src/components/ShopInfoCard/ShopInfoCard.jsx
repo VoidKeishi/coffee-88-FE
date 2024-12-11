@@ -34,27 +34,33 @@ const ShopInfoCard = ({ products }) => {
           <div className="coffee-shop" key={index}>
             <div className="coffee-shop-header">
               <img
-                src={product.image_urls || "/assets/image/shop.png"}
-                alt={product.name || "Shop Image"}
+                src={product.image_urls && product.image_urls.length > 0 
+                  ? product.image_urls[0] 
+                  : "/assets/image/shop.png"}
+                alt={product.name}
                 className="coffee-shop-image"
               />
               <div className="coffee-shop-details">
-                <h3>{product.name || "Shop Name"}</h3>
+                <h3>{product.name}</h3>
                 <p className="coffee-shop-location">
-                  <i className="fas fa-map-marker-alt"></i>{" "}
-                  {product.address || "No address available"}
+                  <i className="fas fa-map-marker-alt"></i> {product.address}
                 </p>
                 <p className="coffee-shop-hours">
-                  <span className="status green-circle"></span> Mở cửa từ{" "}
-                  {product.opening_time || "No opening time"} đến{" "}
-                  {product.closing_time || "No closing time"}
+                  <span className="status green-circle"></span> Open from{" "}
+                  {product.opening_time?.slice(0, 5)} to{" "}
+                  {product.closing_time?.slice(0, 5)}
                 </p>
+                <div className="coffee-shop-info">
+                  <p>Style: {product.style}</p>
+                  <p>Price Range: {product.price_range}</p>
+                  <p>Distance: {product.distance_from_sun}km</p>
+                </div>
                 <div className="coffee-shop-rating">
                   <span className="rating-stars">
-                    {renderStars(parseFloat(product.google_rating || "0"))}
+                    {renderStars(parseFloat(product.google_rating))}
                   </span>
                   <span className="review-count">
-                    {product.google_rating || "0"} rating
+                    {product.google_rating} rating
                   </span>
                 </div>
               </div>
