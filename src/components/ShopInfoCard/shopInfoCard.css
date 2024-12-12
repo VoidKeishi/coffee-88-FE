@@ -123,3 +123,8 @@
 .view-more-button:hover {
   background-color: #6f4e37;
 }
+
+.shop-info-link {
+  text-decoration: none;
+  color: inherit;
+}
