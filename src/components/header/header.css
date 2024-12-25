@@ -48,7 +48,7 @@ textarea::placeholder {
 .search-form {
   display: flex;
   align-items: center;
-  background-color: #f7f7f7;
+  background-color: #e5e5e5;
   border-radius: 6px; /* Bo góc nhẹ */
   padding: 0 10px;
   width: 100%;
