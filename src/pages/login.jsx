@@ -5,9 +5,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import './login.css';
 import API_BASE_URL from '../apiConfig';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
     const { t } = useTranslation();
+    const { login } = useAuth();
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -24,6 +26,7 @@ const Login = () => {
             });
             if (response.ok) {
                 const data = await response.json();
+                login(data); // Save user data to context
                 navigate('/display');
             } else {
                 // Handle login error
