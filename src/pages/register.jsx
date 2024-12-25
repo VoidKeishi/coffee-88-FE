@@ -4,9 +4,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import './register.css'
 import API_BASE_URL from '../apiConfig';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../context/AuthContext';
 
 export const Register = () => {
-      const { t } = useTranslation();
+    const { t } = useTranslation();
+    const { login } = useAuth();
     const [user, setUser] = useState({
         username: '',
         email: '',
@@ -23,7 +25,8 @@ export const Register = () => {
             return;
         }
         try {
-            const response = await fetch(`${API_BASE_URL}auth/sign-up`, {
+            // Register user
+            const registerResponse = await fetch(`${API_BASE_URL}auth/sign-up`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,11 +37,36 @@ export const Register = () => {
                     password: user.password,
                 }),
             });
-            if (response.ok) {
-                const data = await response.json();
-                navigate('/personal');
+
+            if (registerResponse.ok) {
+                const userData = await registerResponse.json();
+                // Save user data in AuthContext
+                login(userData);
+                
+                // Create default preferences with correct price range enum
+                const preferenceResponse = await fetch(`${API_BASE_URL}users/preference`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userData.id,
+                        personalization: true,
+                        priceRange: 'low', // Changed to match backend enum
+                        mainReason: [],
+                        preferredSpace: [],
+                        desiredFacilities: [],
+                        favoriteDrinks: [],
+                        preferredTime: []
+                    }),
+                });
+
+                if (preferenceResponse.ok) {
+                    navigate('/personal');
+                } else {
+                    console.error('Failed to create preferences');
+                }
             } else {
-                // Handle registration error
                 console.error('Registration failed');
             }
         } catch (error) {
