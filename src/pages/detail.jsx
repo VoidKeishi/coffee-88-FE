@@ -1,31 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { AiFillStar, AiOutlineStar, AiOutlineClockCircle, AiOutlinePhone, AiOutlineEnvironment, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import Header from '../components/header/Header';
-import './detail.css'
-;import API_BASE_URL from '../apiConfig';
+import './detail.css';
+import API_BASE_URL from '../apiConfig';
+import { useAuth } from '../context/AuthContext';
 
 function Detail() {
     const { id } = useParams();
     const [cafeData, setCafeData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isFavorite, setIsFavorite] = useState(false);
+    const { user } = useAuth();
 
-       useEffect(() => {
+    useEffect(() => {
         const fetchCafeDetails = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}cafes/detail/${id}`);
-                const data = await response.json();
-                setCafeData(data);
+                const [cafeResponse, favoriteResponse] = await Promise.all([
+                    fetch(`${API_BASE_URL}cafes/detail/${id}`),
+                    user ? fetch(`${API_BASE_URL}users/favourite/list`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ userId: user.id }),
+                    }) : Promise.resolve({ json: () => [] })
+                ]);
+                
+                const cafeData = await cafeResponse.json();
+                const favorites = await favoriteResponse.json();
+                setCafeData(cafeData);
+                setIsFavorite(favorites.includes(parseInt(id)));
             } catch (error) {
-                console.error('Error fetching cafe details:', error);
+                console.error('Error fetching data:', error);
             } finally {
                 setLoading(false);
             }
         };
-    
+
         fetchCafeDetails();
-    }, [id]);
+    }, [id, user]);
+
+    const toggleFavorite = async () => {
+        if (!user) {
+            // Redirect to login if not authenticated
+            return <Navigate to="/login" />;
+        }
+
+        try {
+            const endpoint = isFavorite ? 'remove' : 'add';
+            await fetch(`${API_BASE_URL}users/favourite/${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: user.id,
+                    cafeId: parseInt(id)
+                }),
+            });
+            setIsFavorite(!isFavorite);
+        } catch (error) {
+            console.error('Error toggling favorite:', error);
+        }
+    };
 
     const renderStars = (rating) => {
         const stars = [];
@@ -60,7 +98,7 @@ function Detail() {
                             <h1>{cafeData.name}</h1>
                             <button 
                                 className="favorite-btn"
-                                onClick={() => setIsFavorite(!isFavorite)}
+                                onClick={user ? toggleFavorite : () => <Navigate to="/login" />}
                             >
                                 {isFavorite ? 
                                     <AiFillHeart className="heart-icon filled" /> : 
@@ -78,7 +116,7 @@ function Detail() {
                         </div>
                         <div className="info-item">
                             <AiOutlineClockCircle className="info-icon" />
-                            <span>{`${cafeData.opening_time} - ${cafeData.closing_time}`}</span>
+                            <span>{`${cafeData.opening_time.slice(0,5)} - ${cafeData.closing_time.slice(0,5)}`}</span>
                         </div>
                     
                     </div>
@@ -93,7 +131,7 @@ function Detail() {
                                 <div className="menu-item-info">
                                     <h3>{drink.name}</h3>
                                     <div className="menu-item-details">
-                                    <span className="price">{`${drink.price}đ`}</span>
+                                    <span className="price">{`${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(drink.price)}`}</span>
                                     </div>
                                 </div>
                             </div>
