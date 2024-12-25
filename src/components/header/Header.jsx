@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./header.css";
 import {
   faMagnifyingGlass,
@@ -18,6 +19,8 @@ import { getText } from "../../i18n";
 
 const Header = () => {
   const { t, changeLanguage } = getText();
+  const { user, logout } = useAuth(); // Add user from useAuth
+  const navigate = useNavigate();
   const [currentFlag, setCurrentFlag] = useState(() => {
     const savedLanguage = localStorage.getItem('language'); 
     if (savedLanguage === 'ja') return "japan";
@@ -43,7 +46,9 @@ const Header = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Searching for keyword:", keyword); // Xử lý tìm kiếm từ khóa
+    if (keyword.trim()) {
+      navigate(`/search?q=${encodeURIComponent(keyword.trim())}`);
+    }
   };
 
   const toggleFilter = () => {
@@ -77,8 +82,16 @@ const Header = () => {
 
   // Hàm xử lý các mục trong menu
   const handleMenuItemClick = (item) => {
-    console.log(item); // Tùy thuộc vào mục, có thể điều hướng hoặc thực hiện hành động
+    if (item === "Thông tin tài khoản") {
+      console.log("User Information:", user); // Log user info for debugging
+    }
     setUserMenuOpen(false); // Đóng menu sau khi chọn
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+    setUserMenuOpen(false);
   };
 
   return (
@@ -136,7 +149,7 @@ const Header = () => {
               <FontAwesomeIcon icon={faHeartCircleCheck} />
               {t('favoriteStores')}
             </li>
-            <li onClick={() => handleMenuItemClick("Đăng xuất")}>
+            <li onClick={handleLogout}>
               <FontAwesomeIcon icon={faSignOutAlt} />
               {t('logout')}
             </li>

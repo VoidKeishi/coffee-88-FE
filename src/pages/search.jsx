@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaStar, FaSort } from 'react-icons/fa';
 import Header from '../components/header/Header';
 import './search.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import API_BASE_URL from '../apiConfig';
 
 function Search() {
     const { t } = useTranslation();
     const [showSortOptions, setShowSortOptions] = useState(false);
     const [selectedSort, setSelectedSort] = useState(t('mostRelevant'));
+    const [searchResults, setSearchResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
+    const searchQuery = new URLSearchParams(location.search).get('q');
 
     const sortOptions = [
         t('mostRelevant'),
@@ -20,36 +25,51 @@ function Search() {
         t('priceHighToLow')
     ];
 
-    const searchResults = [
-        {
-            id: 1,
-            name: "Highlands Coffee - Nguyễn Huệ",
-            image: "/highlands.jpg",
-            rating: 4.5,
-            reviews: 128,
-            address: "123 Nguyễn Huệ, Quận 1, TP.HCM",
-            distance: "0.5 km",
-            status: "Đang mở cửa",
-            priceRange: "20.000đ - 80.000đ",
-            openTime: "07:00 - 22:00"
-        },
-        {
-            id: 2,
-            name: "Highlands Coffee - Lê Lợi",
-            image: "/highlands.jpg",
-            rating: 4.3,
-            reviews: 95,
-            address: "456 Lê Lợi, Quận 1, TP.HCM",
-            distance: "0.8 km",
-            status: "Đang mở cửa",
-            priceRange: "20.000đ - 85.000đ",
-            openTime: "07:00 - 22:30"
-        },
-        // Thêm kết quả khác...
-    ];
+    useEffect(() => {
+        const fetchResults = async () => {
+            if (!searchQuery) return;
+            
+            setIsLoading(true);
+            try {
+                const response = await fetch(`${API_BASE_URL}cafes/search/${encodeURIComponent(searchQuery)}`);
+                const data = await response.json();
+                setSearchResults(data);
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+                setSearchResults([]);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchResults();
+    }, [searchQuery]);
+
+    const sortResults = (results, sortType) => {
+        const sorted = [...results];
+        switch(sortType) {
+            case t('highestRating'):
+                return sorted.sort((a, b) => b.google_rating - a.google_rating);
+            case t('priceLowToHigh'):
+                return sorted.sort((a, b) => {
+                    const getMinPrice = (cafe) => Math.min(...cafe.drinks.map(d => parseFloat(d.price)));
+                    return getMinPrice(a) - getMinPrice(b);
+                });
+            case t('priceHighToLow'):
+                return sorted.sort((a, b) => {
+                    const getMaxPrice = (cafe) => Math.max(...cafe.drinks.map(d => parseFloat(d.price)));
+                    return getMaxPrice(b) - getMaxPrice(a);
+                });
+            case t('closestDistance'):
+                return sorted.sort((a, b) => parseFloat(a.distance_from_sun) - parseFloat(b.distance_from_sun));
+            default:
+                return sorted;
+        }
+    };
 
     const handleSortSelect = (option) => {
         setSelectedSort(option);
+        setSearchResults(prev => sortResults(prev, option));
         setShowSortOptions(false);
     };
 
@@ -63,7 +83,14 @@ function Search() {
     };
 
     const handleCafeClick = (cafeId) => {
-        navigate(`/cafe/${cafeId}`);
+        navigate(`/detail/${cafeId}`);
+    };
+
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('vi-VN', { 
+            style: 'currency', 
+            currency: 'VND' 
+        }).format(price);
     };
 
     return (
@@ -72,7 +99,7 @@ function Search() {
             <div className="search-results-container">
                 <div className="search-header">
                     <div className="search-title">
-                        <h2>{t('searchResultsFor')} <span>"Highland"</span></h2>
+                        <h2>{t('searchResultsFor')} <span>"{searchQuery}"</span></h2>
                         <p>{searchResults.length} {t('resultsFound')} </p>
                     </div>
                     
@@ -102,39 +129,54 @@ function Search() {
                     </div>
                 </div>
 
-                <div className="results-grid">
-                    {searchResults.map((item) => (
-                        <div 
-                            key={item.id} 
-                            className="result-card"
-                            onClick={() => handleCafeClick(item.id)}
-                            style={{ cursor: 'pointer' }}
-                        >
-                            <div className="result-image">
-                                <img src={item.image} alt={item.name} />
-                                <div className="status-badge">{item.status}</div>
-                            </div>
-                            <div className="result-info">
-                                <h3>{item.name}</h3>
-                                <div className="rating-container">
-                                    <div className="stars">
-                                        {renderStars(item.rating)}
+                {isLoading ? (
+                    <div>Loading...</div>
+                ) : (
+                    <div className="results-grid">
+                        {searchResults.map((item) => {
+                            const minPrice = Math.min(...item.drinks.map(d => parseFloat(d.price)));
+                            const maxPrice = Math.max(...item.drinks.map(d => parseFloat(d.price)));
+                            
+                            return (
+                                <div 
+                                    key={item.id} 
+                                    className="result-card"
+                                    onClick={() => handleCafeClick(item.id)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <div className="result-image">
+                                        <img src={item.image_urls[0]} alt={item.name} />
+                                        <div className="status-badge">
+                                            {new Date().getHours() >= parseInt(item.opening_time) && 
+                                             new Date().getHours() < parseInt(item.closing_time) 
+                                                ? t('open') 
+                                                : t('closed')}
+                                        </div>
                                     </div>
-                                    <span className="rating-number">{item.rating}</span>
-                                    <span className="review-count">({item.reviews} {t('rating')})</span>
+                                    <div className="result-info">
+                                        <h3>{item.name}</h3>
+                                        <div className="rating-container">
+                                            <div className="stars">
+                                                {renderStars(parseFloat(item.google_rating))}
+                                            </div>
+                                            <span className="rating-number">{item.google_rating}</span>
+                                        </div>
+                                        <p className="address">{item.address}</p>
+                                        <div className="additional-info">
+                                            <span className="price-range">
+                                                {formatPrice(minPrice)} - {formatPrice(maxPrice)}
+                                            </span>
+                                            <span className="distance">{item.distance_from_sun}km</span>
+                                        </div>
+                                        <div className="open-time">
+                                            <span>{t('Opening hours')}: {item.opening_time.substring(0,5)} - {item.closing_time.substring(0,5)}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p className="address">{item.address}</p>
-                                <div className="additional-info">
-                                    <span className="price-range">{item.priceRange}</span>
-                                    <span className="distance">{item.distance}</span>
-                                </div>
-                                <div className="open-time">
-                                    <span>Giờ mở cửa: {item.openTime}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </>
     );
