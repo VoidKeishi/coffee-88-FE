@@ -4,8 +4,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import './login.css';
 import API_BASE_URL from '../apiConfig';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
+    const { t } = useTranslation();
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -36,8 +38,8 @@ const Login = () => {
         <div className="login-container">
             <div className="login-left"></div>
             <div className="login-right">
-                <h1>Login</h1>
-                <p className="subtitle">To access your account</p>
+                <h1>{t('login')}</h1>
+                <p className="subtitle">{t('accessAccount')}</p>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <input 
                         type="email" 
@@ -49,7 +51,7 @@ const Login = () => {
                     <div className="password-input">
                         <input 
                             type={showPassword ? "text" : "password"} 
-                            placeholder="Password" 
+                            placeholder={t('password')}
                             required 
                             value={credentials.password}
                             onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
@@ -61,13 +63,13 @@ const Login = () => {
                     <div className="login-options">
                         <div className="remember-me">
                             <input type="checkbox" id="remember" />
-                            <label htmlFor="remember">Remember me</label>
+                            <label htmlFor="remember">{t('rememberMe')}</label>
                         </div>
-                        <a href="/forgot-password" className="forgot-password">Forgot your password?</a>
+                        <a href="/forgot-password" className="forgot-password">{t('forgotYourPassword')}?</a>
                     </div>
-                    <button type="submit" className="login-button">Log In</button>
+                    <button type="submit" className="login-button">{t('login')}</button>
                     <p className="signup-link">
-                        Don't have an account? <a href="/register">Sign up</a>
+                    {t('dontHaveAccount')}? <a href="/register">{t('signUp')}</a>
                     </p>
                 </form>
             </div>

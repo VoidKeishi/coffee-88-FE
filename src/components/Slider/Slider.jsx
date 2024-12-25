@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./slider.css";
+import { getText } from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 const Slider = () => {
+  const { t } = useTranslation();
   const trackRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalImages = 8; // Số lượng ảnh trong slider
@@ -79,10 +82,10 @@ const Slider = () => {
   return (
     <div id="slider-container">
       <div className="slider-header">
-        <div id="slider-title">RECOMMENDED</div>
+        <div id="slider-title">{t('recommended')}</div>
         <Link to="/favorite" className="favorite-link">
           <i className="fas fa-heart"></i>
-          Yêu thích
+           {t('favorite')}
         </Link>
       </div>
       <div

@@ -9,6 +9,7 @@ import Detail from './pages/detail';
 import Search from './pages/search';
 import Favorite from './pages/favorite';
 import './App.css';
+import './i18n'; 
 
 function App() {
     return (
@@ -18,7 +19,7 @@ function App() {
             <Route path="/display" element={<Display />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/personal" element={<Personal />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/detail/:id" element={<Detail />} />
             <Route path="/search" element={<Search />} />
             <Route path="/favorite" element={<Favorite />} />
             <Route path="/" element={<Navigate to="/display" replace />} />

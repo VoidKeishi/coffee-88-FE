@@ -13,16 +13,30 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
+import { getText } from "../../i18n";
 
 const Header = () => {
-  const [currentFlag, setCurrentFlag] = useState("vietnam"); // Mặc định cờ Việt Nam
+  const { t, changeLanguage } = getText();
+  const [currentFlag, setCurrentFlag] = useState(() => {
+    const savedLanguage = localStorage.getItem('language'); 
+    if (savedLanguage === 'ja') return "japan";
+    if (savedLanguage === 'en') return "england";
+    return "vietnam"; // Mặc định là Việt Nam
+  });
   const [keyword, setKeyword] = useState(""); // Thay đổi address thành keyword
   const isFilterOpen = useState(false); // Trạng thái hiển thị filter popup
 
   const handleFlagChange = () => {
     setCurrentFlag((prevFlag) => {
-      if (prevFlag === "vietnam") return "japan";
-      if (prevFlag === "japan") return "england";
+      
+      if (prevFlag === "vietnam"){
+        changeLanguage('ja')
+        return "japan";}
+      if (prevFlag === "japan"){
+        changeLanguage('en')
+        return "england"} ;
+        changeLanguage('vi')
       return "vietnam";
     });
   };
@@ -81,7 +95,7 @@ const Header = () => {
           <input
             type="text"
             className="search-input"
-            placeholder="Tìm kiếm"
+            placeholder={t("search")}
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
@@ -113,20 +127,21 @@ const Header = () => {
 
       {isUserMenuOpen && (
         <div className="user-menu-popup">
-          <ul>
+      <ul>
             <li onClick={() => handleMenuItemClick("Thông tin tài khoản")}>
               <FontAwesomeIcon icon={faUser} />
-              Thông tin tài khoản
+              {t('accountInfo')}
             </li>
             <li onClick={() => handleMenuItemClick("Cửa hàng yêu thích")}>
               <FontAwesomeIcon icon={faHeartCircleCheck} />
-              Cửa hàng yêu thích
+              {t('favoriteStores')}
             </li>
             <li onClick={() => handleMenuItemClick("Đăng xuất")}>
               <FontAwesomeIcon icon={faSignOutAlt} />
-              Đăng xuất
+              {t('logout')}
             </li>
           </ul>
+
         </div>
       )}
 
@@ -134,12 +149,12 @@ const Header = () => {
       {isFilterOpen && (
         <div className="filter-popup">
           <div className="filter-content">
-            <h3>BỘ LỌC TÌM KIẾM</h3>
+            <h3>{t('searchFilter')}</h3>
             <button className="close-popup" onClick={toggleFilter}>
               <FontAwesomeIcon icon={faXmark} />
             </button>
             <div className="filter-option">
-              <h4>Khoảng cách</h4>
+              <h4>{t('distance')}</h4>
               <div>
                 <button
                   className={`filter-btn ${
@@ -176,7 +191,7 @@ const Header = () => {
               </div>
             </div>
             <div className="filter-option">
-              <h4>Phong cách</h4>
+              <h4>{t('style')}</h4>
               <div>
                 <button
                   className={`filter-btn ${
@@ -213,7 +228,7 @@ const Header = () => {
               </div>
             </div>
             <div className="filter-option">
-              <h4>Giá tiền</h4>
+              <h4>{t('price')}</h4>
               <div>
                 <button
                   className={`filter-btn ${
@@ -254,7 +269,7 @@ const Header = () => {
               </div>
             </div>
             <div className="filter-option">
-              <h4>Đánh giá</h4>
+              <h4>{t('rating')}</h4>
               <div>
                 <div>
                   <button
@@ -293,7 +308,7 @@ const Header = () => {
               </div>
             </div>
             <button className="apply-filter" onClick={toggleFilter}>
-              Áp dụng
+            {t('apply')}
             </button>
           </div>
         </div>

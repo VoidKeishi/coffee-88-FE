@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import './register.css'
 import API_BASE_URL from '../apiConfig';
+import { useTranslation } from 'react-i18next';
 
 export const Register = () => {
+      const { t } = useTranslation();
     const [user, setUser] = useState({
         username: '',
         email: '',
@@ -48,8 +50,8 @@ export const Register = () => {
         <div className="register-container">
             <div className="register-left"></div>
         <div className="register-right">
-          <h1>Welcome to Coffee 88</h1>
-                <p>Already have an account? <a href="/login">Log in</a></p>
+          <h1>{t('welcomeCoffee88')}</h1>
+                <p>{t('alreadyHaveAccount')}? <a href="/login">{t('login')}</a></p>
           <form className="register-form" onSubmit={handleSubmit}>
             <input 
                 type="email" 
@@ -60,7 +62,7 @@ export const Register = () => {
             />
             <input 
                 type="text" 
-                placeholder="Username" 
+                placeholder={t('username')}
                 required 
                 value={user.username}
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
@@ -68,7 +70,7 @@ export const Register = () => {
                     <div className="password-input">
                         <input 
                             type={showPassword ? "text" : "password"} 
-                            placeholder="Password" 
+                            placeholder={t('password')}
                             required 
                             value={user.password}
                             onChange={(e) => setUser({ ...user, password: e.target.value })}
@@ -80,7 +82,7 @@ export const Register = () => {
                     <div className="password-input">
                         <input 
                             type={showConfirmPassword ? "text" : "password"} 
-                            placeholder="Confirm Password" 
+                            placeholder={t('confirmPassword')}
                             required 
                             value={user.confirmPassword}
                             onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
@@ -92,13 +94,10 @@ export const Register = () => {
             <div className="checkbox-container">
               <input type="checkbox" id="subscribe" className="checkbox" />
               <label htmlFor="subscribe">
-                I want to receive emails about the product, feature updates, events, and marketing promotions.
-              </label>
+              {t('receiveEmails')}</label>
             </div>
-            <button type="submit" className="register-button">Sign Up</button>
-            <p>
-              By creating an account, you agree to the <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.
-            </p>
+            <button type="submit" className="register-button">{t('signUp')}</button>
+          
           </form>
         </div>
       </div>

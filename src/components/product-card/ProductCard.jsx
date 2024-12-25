@@ -1,7 +1,9 @@
 import React from "react";
 import "./productCard.css";
+import { useTranslation } from "react-i18next";
 
 const ProductCard = ({ product }) => {
+  const { t } = useTranslation();
   return (
     <div className="product-card">
       <div className="product-image">

@@ -3,19 +3,21 @@ import { FaStar, FaSort } from 'react-icons/fa';
 import Header from '../components/header/Header';
 import './search.css';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Search() {
+    const { t } = useTranslation();
     const [showSortOptions, setShowSortOptions] = useState(false);
-    const [selectedSort, setSelectedSort] = useState('Liên quan nhất');
+    const [selectedSort, setSelectedSort] = useState(t('mostRelevant'));
     const navigate = useNavigate();
 
     const sortOptions = [
-        'Liên quan nhất',
-        'Đánh giá cao nhất',
-        'Bán chạy nhất',
-        'Khoảng cách gần nhất',
-        'Giá thấp đến cao',
-        'Giá cao đến thấp'
+        t('mostRelevant'),
+        t('highestRating'),
+        t('bestSelling'),
+        t('closestDistance'),
+        t('priceLowToHigh'),
+        t('priceHighToLow')
     ];
 
     const searchResults = [
@@ -70,12 +72,12 @@ function Search() {
             <div className="search-results-container">
                 <div className="search-header">
                     <div className="search-title">
-                        <h2>Kết quả tìm kiếm cho từ khóa: <span>"Highland"</span></h2>
-                        <p>{searchResults.length} kết quả được tìm thấy</p>
+                        <h2>{t('searchResultsFor')} <span>"Highland"</span></h2>
+                        <p>{searchResults.length} {t('resultsFound')} </p>
                     </div>
                     
                     <div className="sort-container">
-                        <span className="sort-label">Sắp xếp theo:</span>
+                        <span className="sort-label">{t('sortBy')}</span>
                         <div 
                             className="sort-button"
                             onClick={() => setShowSortOptions(!showSortOptions)}
@@ -119,7 +121,7 @@ function Search() {
                                         {renderStars(item.rating)}
                                     </div>
                                     <span className="rating-number">{item.rating}</span>
-                                    <span className="review-count">({item.reviews} đánh giá)</span>
+                                    <span className="review-count">({item.reviews} {t('rating')})</span>
                                 </div>
                                 <p className="address">{item.address}</p>
                                 <div className="additional-info">

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import "./shopInfoCard.css";
+import { useTranslation } from "react-i18next";
 
 const ShopInfoCard = ({ products }) => {
+    const { t } = useTranslation();
   const [visibleShops, setVisibleShops] = useState(6); // Hiển thị tối đa 6 quán ban đầu
 
   const handleViewMore = () => {
@@ -29,7 +31,7 @@ const ShopInfoCard = ({ products }) => {
 
   return (
     <div className="coffee-shop-section">
-      <div id="list-shop-title">Coffee Shop List</div>
+      <div id="list-shop-title">{t('coffeeShopList')}</div>
       <div className="coffee-shop-list">
         {products.slice(0, visibleShops).map((product, index) => (
           <div className="coffee-shop" key={index}>
@@ -53,16 +55,16 @@ const ShopInfoCard = ({ products }) => {
                     {product.closing_time?.slice(0, 5)}
                   </p>
                   <div className="coffee-shop-info">
-                    <p>Style: {product.style}</p>
+                    <p>{t('style')}: {product.style}</p>
                     <p>Price Range: {product.price_range}</p>
-                    <p>Distance: {product.distance_from_sun}km</p>
+                    <p>{t('distance')}: {product.distance_from_sun}km</p>
                   </div>
                   <div className="coffee-shop-rating">
                     <span className="rating-stars">
                       {renderStars(parseFloat(product.google_rating))}
                     </span>
                     <span className="review-count">
-                      {product.google_rating} rating
+                      {product.google_rating} {t('rating')}
                     </span>
                   </div>
                 </div>

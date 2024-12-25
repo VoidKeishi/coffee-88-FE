@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { AiFillStar, AiOutlineStar, AiOutlineEnvironment, AiOutlineClockCircle, AiFillHeart } from 'react-icons/ai';
 import Header from '../components/header/Header';
 import './favorite.css';
+import { useTranslation } from 'react-i18next';
 
 function Favorite() {
+    const { t } = useTranslation();
     // Mock data cho danh sách yêu thích
     const favoriteCafes = [
         {
@@ -52,7 +54,7 @@ function Favorite() {
         <>
             <Header />
             <div className="favorite-container">
-                <h1>Quán Cafe Yêu Thích</h1>
+                <h1>{t('favoriteCafes')}</h1>
                 <div className="favorite-grid">
                     {favoriteCafes.map(cafe => (
                         <Link to={`/detail/${cafe.id}`} key={cafe.id} className="favorite-card">
