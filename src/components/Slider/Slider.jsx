@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import "./slider.css";
+import { Link } from "react-router-dom";
+import "./Slider.css";
 
 const Slider = () => {
   const trackRef = useRef(null);
@@ -77,7 +78,13 @@ const Slider = () => {
 
   return (
     <div id="slider-container">
-      <div id="slider-title">RECOMMENDED</div>
+      <div className="slider-header">
+        <div id="slider-title">RECOMMENDED</div>
+        <Link to="/favorite" className="favorite-link">
+          <i className="fas fa-heart"></i>
+          Yêu thích
+        </Link>
+      </div>
       <div
         id="image-track"
         ref={trackRef}

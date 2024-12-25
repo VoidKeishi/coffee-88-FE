@@ -201,4 +201,38 @@
         flex-direction: column;
         gap: 0.5rem;
     }
+}
+
+.cafe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.favorite-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 12px;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.heart-icon {
+    font-size: 30px;
+    transition: all 0.3s ease;
+    color: #666;
+    display: block;
+}
+
+.heart-icon.filled {
+    color: #ff4444;
 } 

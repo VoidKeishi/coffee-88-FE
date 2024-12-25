@@ -1,30 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { AiFillStar, AiOutlineStar, AiOutlineClockCircle, AiOutlineEnvironment } from 'react-icons/ai';
+import React, { useState } from 'react';
+import { AiFillStar, AiOutlineStar, AiOutlineClockCircle, AiOutlinePhone, AiOutlineEnvironment, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import Header from '../components/header/Header';
 import './detail.css';
-import API_BASE_URL from '../apiConfig';
 
 function Detail() {
-    const { id } = useParams();
-    const [cafeData, setCafeData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    // Mock data - có thể thay thế bằng data thật sau này
+    const cafeInfo = {
+        name: "Highlands Coffee",
+        address: "123 Nguyễn Huệ, Quận 1, TP.HCM",
+        openHours: "07:00 - 22:30",
+        phone: "028 1234 5678",
+        rating: 4.5,
+        description: "Không gian thoáng đãng, view đẹp, phù hợp để làm việc và gặp gỡ bạn bè."
+    };
 
-    useEffect(() => {
-        const fetchCafeDetails = async () => {
-            try {
-                const response = await fetch(`${API_BASE_URL}cafes/detail/${id}`);
-                const data = await response.json();
-                setCafeData(data);
-            } catch (error) {
-                console.error('Error fetching cafe details:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const menuItems = [
+        { id: 1, name: "Cà phê sữa đá", price: "29.000đ", rating: 4.8, image: "/latte.jpg" },
+        { id: 2, name: "Cappuccino", price: "45.000đ", rating: 4.6, image: "/latte.jpg" },
+        { id: 3, name: "Espresso", price: "35.000đ", rating: 4.7, image: "/latte.jpg" },
+        { id: 4, name: "Mocha", price: "49.000đ", rating: 4.5, image: "/latte.jpg" },
+        { id: 5, name: "Latte", price: "45.000đ", rating: 4.9, image: "/latte.jpg" },
+        // Thêm nhiều items khác...
+    ];
 
-        fetchCafeDetails();
-    }, [id]);
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+    };
 
     const renderStars = (rating) => {
         const stars = [];
@@ -38,49 +41,60 @@ function Detail() {
         return stars;
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!cafeData) {
-        return <div>Cafe not found</div>;
-    }
-
     return (
         <>
             <Header />
             <div className="detail-container">
                 <div className="detail-left">
                     <div className="cafe-image">
-                        <img src={cafeData.image_urls[0]} alt={cafeData.name} />
+                        <img src="/highlands.jpg" alt="Highlands Coffee" />
                     </div>
                     <div className="cafe-info">
-                        <h1>{cafeData.name}</h1>
+                        <div className="cafe-header">
+                            <h1>{cafeInfo.name}</h1>
+                            <button 
+                                className="favorite-btn"
+                                onClick={toggleFavorite}
+                            >
+                                {isFavorite ? 
+                                    <AiFillHeart className="heart-icon filled" /> : 
+                                    <AiOutlineHeart className="heart-icon" />
+                                }
+                            </button>
+                        </div>
                         <div className="rating">
-                            {renderStars(cafeData.google_rating)}
-                            <span className="rating-number">({cafeData.google_rating})</span>
+                            {renderStars(cafeInfo.rating)}
+                            <span className="rating-number">({cafeInfo.rating})</span>
                         </div>
                         <div className="info-item">
                             <AiOutlineEnvironment className="info-icon" />
-                            <span>{cafeData.address}</span>
+                            <span>{cafeInfo.address}</span>
                         </div>
                         <div className="info-item">
                             <AiOutlineClockCircle className="info-icon" />
-                            <span>{`${cafeData.opening_time} - ${cafeData.closing_time}`}</span>
+                            <span>{cafeInfo.openHours}</span>
                         </div>
+                        <div className="info-item">
+                            <AiOutlinePhone className="info-icon" />
+                            <span>{cafeInfo.phone}</span>
+                        </div>
+                        <p className="description">{cafeInfo.description}</p>
                     </div>
                 </div>
 
                 <div className="detail-right">
                     <h2>Menu</h2>
                     <div className="menu-container">
-                        {cafeData.drinks && cafeData.drinks.map((drink) => (
-                            <div key={drink.id} className="menu-item">
-                                <img src={drink.image_url} alt={drink.name} />
+                        {menuItems.map((item) => (
+                            <div key={item.id} className="menu-item">
+                                <img src={item.image} alt={item.name} />
                                 <div className="menu-item-info">
-                                    <h3>{drink.name}</h3>
+                                    <h3>{item.name}</h3>
                                     <div className="menu-item-details">
-                                        <span className="price">{`${drink.price}đ`}</span>
+                                        <span className="price">{item.price}</span>
+                                        <div className="menu-rating">
+                                            {renderStars(item.rating)}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -92,4 +106,4 @@ function Detail() {
     );
 }
 
-export default Detail;
+export default Detail; 

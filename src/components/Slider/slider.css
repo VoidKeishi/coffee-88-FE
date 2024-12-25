@@ -10,17 +10,50 @@
   );
 }
 
+.slider-header {
+  position: relative; /* Để có thể định vị tuyệt đối cho các phần tử con */
+  display: flex;
+  justify-content: center; /* Căn giữa tiêu đề */
+  align-items: center;
+  padding: 20px 40px;
+}
+
 #slider-title {
-  position: relative; /* Định vị tiêu đề bên trong container */
-  padding: 20px 0;
-  text-align: center; /* Canh giữa tiêu đề */
-  font-size: 2.2rem; /* Tăng kích thước chữ */
+  text-align: center;
+  font-size: 2.2rem;
   font-weight: bold;
-  color: #8B4513; /* Đổi màu chữ sang nâu đậm để nổi bật trên nền nhạt */
+  color: #8B4513;
   font-family: "Bahnschrift", sans-serif;
   text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.2); /* Shadow màu nâu nhạt */
-  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.2);
+}
+
+.favorite-link {
+  position: absolute; /* Định vị tuyệt đối */
+  right: 40px; /* Cách lề phải 40px */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid #e0e0e0;
+}
+
+.favorite-link i {
+  color: #ff4444;
+  font-size: 18px;
+}
+
+.favorite-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #fff5f5;
+  border-color: #ff4444;
 }
 
 /* Thêm dots navigation */
