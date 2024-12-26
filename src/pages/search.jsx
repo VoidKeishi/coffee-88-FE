@@ -7,28 +7,50 @@ import { useTranslation } from 'react-i18next';
 import API_BASE_URL from '../apiConfig';
 
 function Search() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [showSortOptions, setShowSortOptions] = useState(false);
-    const [selectedSort, setSelectedSort] = useState(t('mostRelevant'));
-    const [searchResults, setSearchResults] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
-    const location = useLocation();
-    const searchQuery = new URLSearchParams(location.search).get('q');
-
-    const sortOptions = [
+    const [sortOptions, setSortOptions] = useState([
         t('mostRelevant'),
         t('highestRating'),
         t('bestSelling'),
         t('closestDistance'),
         t('priceLowToHigh'),
         t('priceHighToLow')
-    ];
+    ]);
+    const [selectedSort, setSelectedSort] = useState(sortOptions[0]);
+    const [searchResults, setSearchResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const searchQuery = new URLSearchParams(location.search).get('q');
+
+    useEffect(() => {
+        // Cập nhật sortOptions khi ngôn ngữ thay đổi
+        const newSortOptions = [
+            t('mostRelevant'),
+            t('highestRating'),
+            t('bestSelling'),
+            t('closestDistance'),
+            t('priceLowToHigh'),
+            t('priceHighToLow')
+        ];
+
+        // Tìm chỉ mục của selectedSort hiện tại trong danh sách cũ
+        const currentIndex = sortOptions.findIndex(option => option === selectedSort);
+
+        // Cập nhật sortOptions và selectedSort tương ứng với ngôn ngữ mới
+        setSortOptions(newSortOptions);
+        if (currentIndex >= 0) {
+            setSelectedSort(newSortOptions[currentIndex]);
+        } else {
+            setSelectedSort(newSortOptions[0]); // Mặc định nếu không tìm thấy
+        }
+    }, [i18n.language, t]);
 
     useEffect(() => {
         const fetchResults = async () => {
             if (!searchQuery) return;
-            
+
             setIsLoading(true);
             try {
                 const response = await fetch(`${API_BASE_URL}cafes/search/${encodeURIComponent(searchQuery)}`);
@@ -47,7 +69,7 @@ function Search() {
 
     const sortResults = (results, sortType) => {
         const sorted = [...results];
-        switch(sortType) {
+        switch (sortType) {
             case t('highestRating'):
                 return sorted.sort((a, b) => b.google_rating - a.google_rating);
             case t('priceLowToHigh'):
@@ -91,16 +113,6 @@ function Search() {
             style: 'currency', 
             currency: 'VND' 
         }).format(price);
-    };
-
-    const renderStatusBadge = (openingTime, closingTime) => {
-        const currentHour = new Date().getHours();
-        const isOpen = currentHour >= parseInt(openingTime) && currentHour < parseInt(closingTime);
-        return (
-            <div className={`status-badge ${isOpen ? 'open' : 'closed'}`}>
-                {isOpen ? t('open') : t('closed')}
-            </div>
-        );
     };
 
     return (
@@ -156,7 +168,12 @@ function Search() {
                                 >
                                     <div className="result-image">
                                         <img src={item.image_urls[0]} alt={item.name} />
-                                        {renderStatusBadge(item.opening_time, item.closing_time)}
+                                        <div className="status-badge">
+                                            {new Date().getHours() >= parseInt(item.opening_time) && 
+                                             new Date().getHours() < parseInt(item.closing_time) 
+                                                ? t('openNow') 
+                                                : t('closed')}
+                                        </div>
                                     </div>
                                     <div className="result-info">
                                         <h3>{item.name}</h3>
@@ -174,7 +191,7 @@ function Search() {
                                             <span className="distance">{item.distance_from_sun}km</span>
                                         </div>
                                         <div className="open-time">
-                                            <span>{t('Opening hours')}: {item.opening_time.substring(0,5)} - {item.closing_time.substring(0,5)}</span>
+                                            <span>{t('openingHours')}: {item.opening_time.substring(0,5)} - {item.closing_time.substring(0,5)}</span>
                                         </div>
                                     </div>
                                 </div>
