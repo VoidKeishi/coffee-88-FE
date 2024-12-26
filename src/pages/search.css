@@ -129,6 +129,16 @@
     font-weight: 500;
 }
 
+.status-badge.open {
+    background-color: #4caf50; /* Green for open */
+    color: white;
+}
+
+.status-badge.closed {
+    background-color: #f44336; /* Red for closed */
+    color: white;
+}
+
 .result-info {
     padding: 20px;
 }
@@ -222,4 +232,4 @@
     .results-grid {
         grid-template-columns: 1fr;
     }
-} 
+}

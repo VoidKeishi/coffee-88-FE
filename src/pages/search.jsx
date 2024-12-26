@@ -93,6 +93,16 @@ function Search() {
         }).format(price);
     };
 
+    const renderStatusBadge = (openingTime, closingTime) => {
+        const currentHour = new Date().getHours();
+        const isOpen = currentHour >= parseInt(openingTime) && currentHour < parseInt(closingTime);
+        return (
+            <div className={`status-badge ${isOpen ? 'open' : 'closed'}`}>
+                {isOpen ? t('open') : t('closed')}
+            </div>
+        );
+    };
+
     return (
         <>
             <Header />
@@ -146,12 +156,7 @@ function Search() {
                                 >
                                     <div className="result-image">
                                         <img src={item.image_urls[0]} alt={item.name} />
-                                        <div className="status-badge">
-                                            {new Date().getHours() >= parseInt(item.opening_time) && 
-                                             new Date().getHours() < parseInt(item.closing_time) 
-                                                ? t('open') 
-                                                : t('closed')}
-                                        </div>
+                                        {renderStatusBadge(item.opening_time, item.closing_time)}
                                     </div>
                                     <div className="result-info">
                                         <h3>{item.name}</h3>
@@ -169,7 +174,7 @@ function Search() {
                                             <span className="distance">{item.distance_from_sun}km</span>
                                         </div>
                                         <div className="open-time">
-                                            <span>{t('openingHours')}: {item.opening_time.substring(0,5)} - {item.closing_time.substring(0,5)}</span>
+                                            <span>{t('Opening hours')}: {item.opening_time.substring(0,5)} - {item.closing_time.substring(0,5)}</span>
                                         </div>
                                     </div>
                                 </div>
