@@ -1,7 +1,7 @@
 .coffee-shop-section {
   padding: 20px;
   text-align: center;
-  background-color: black;
+  background-color: #2C1810;
 }
 
 .coffee-shop-list {
@@ -20,6 +20,7 @@
   margin: 15px;
   max-width: 360px;
   text-align: center;
+  position: relative;
 }
 
 #list-shop-title {
@@ -127,4 +128,35 @@
 .shop-info-link {
   text-decoration: none;
   color: inherit;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+}
+
+.favorite-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;  /* Increased z-index */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Optional: adds subtle shadow */
+}
+
+.heart-icon {
+    font-size: 20px;
+    color: #ff4444;
+}
+
+.heart-icon.filled {
+    color: #ff0000;
 }
