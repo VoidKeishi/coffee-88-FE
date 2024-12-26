@@ -82,8 +82,8 @@ const Header = () => {
 
   // Hàm xử lý các mục trong menu
   const handleMenuItemClick = (item) => {
-    if (item === "Thông tin tài khoản") {
-      console.log("User Information:", user); // Log user info for debugging
+    if (item === "Preferences") {
+      navigate('/personal');
     }
     setUserMenuOpen(false); // Đóng menu sau khi chọn
   };
@@ -98,7 +98,7 @@ const Header = () => {
     <header className="header">
       <div className="logo">
         <Link to="/">
-          <img src="/assets/image/logo-coffee.png" alt="Logo" />
+          <img src="/assets/image/logo.jpeg" alt="Logo" />
         </Link>
       </div>
 
@@ -140,21 +140,16 @@ const Header = () => {
 
       {isUserMenuOpen && (
         <div className="user-menu-popup">
-      <ul>
-            <li onClick={() => handleMenuItemClick("Thông tin tài khoản")}>
+          <ul>
+            <li onClick={() => handleMenuItemClick("Preferences")}>
               <FontAwesomeIcon icon={faUser} />
-              {t('accountInfo')}
-            </li>
-            <li onClick={() => handleMenuItemClick("Cửa hàng yêu thích")}>
-              <FontAwesomeIcon icon={faHeartCircleCheck} />
-              {t('favoriteStores')}
+              {t('Preferences')}
             </li>
             <li onClick={handleLogout}>
               <FontAwesomeIcon icon={faSignOutAlt} />
               {t('logout')}
             </li>
           </ul>
-
         </div>
       )}
 
