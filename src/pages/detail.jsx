@@ -5,8 +5,10 @@ import Header from '../components/header/Header';
 import './detail.css';
 import API_BASE_URL from '../apiConfig';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 function Detail() {
+    const {t} = useTranslation();
     const { id } = useParams();
     const [cafeData, setCafeData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -123,7 +125,7 @@ function Detail() {
                 </div>
 
                 <div className="detail-right">
-                    <h2>Menu</h2>
+                    <h2>{t('menu')}</h2>
                     <div className="menu-container">
                     {cafeData.drinks && cafeData.drinks.map((drink) => (
                             <div key={drink.id} className="menu-item">

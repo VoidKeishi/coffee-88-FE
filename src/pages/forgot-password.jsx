@@ -43,7 +43,7 @@ const ForgotPassword = () => {
                             <div className="password-input">
                                 <input 
                                     type={showNewPassword ? "text" : "password"} 
-                                    placeholder="New Password" 
+                                    placeholder={t('newPassword')}
                                     required 
                                 />
                                 <span onClick={() => setShowNewPassword(!showNewPassword)}>

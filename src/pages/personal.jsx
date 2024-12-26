@@ -117,7 +117,6 @@ const Personal = () => {
 
     return (
         <div className="personal-container">
-            {loading && <div className="loading-overlay">Loading...</div>}
             <div className="personal-left"></div>
             <div className="personal-right">
                 <h1>{t('personalization')}</h1>

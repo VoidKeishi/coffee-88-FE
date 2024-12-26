@@ -50,13 +50,13 @@ const ShopInfoCard = ({ products }) => {
                     <i className="fas fa-map-marker-alt"></i> {product.address}
                   </p>
                   <p className="coffee-shop-hours">
-                    <span className="status green-circle"></span> Open from{" "}
-                    {product.opening_time?.slice(0, 5)} to{" "}
+                    <span className="status green-circle"></span> { t('openFrom')+" "}
+                    {product.opening_time?.slice(0, 5)} {t('to') +" "}
                     {product.closing_time?.slice(0, 5)}
                   </p>
                   <div className="coffee-shop-info">
                     <p>{t('style')}: {product.style}</p>
-                    <p>Price Range: {product.price_range}</p>
+                    <p>{t('priceRange')}: {product.price_range}</p>
                     <p>{t('distance')}: {product.distance_from_sun}km</p>
                   </div>
                   <div className="coffee-shop-rating">
@@ -75,7 +75,7 @@ const ShopInfoCard = ({ products }) => {
       </div>
       {visibleShops < products.length && (
         <button className="view-more-button" onClick={handleViewMore}>
-          View More
+          {t('viewMore')}
         </button>
       )}
     </div>

@@ -169,7 +169,7 @@ function Search() {
                                             <span className="distance">{item.distance_from_sun}km</span>
                                         </div>
                                         <div className="open-time">
-                                            <span>{t('Opening hours')}: {item.opening_time.substring(0,5)} - {item.closing_time.substring(0,5)}</span>
+                                            <span>{t('openingHours')}: {item.opening_time.substring(0,5)} - {item.closing_time.substring(0,5)}</span>
                                         </div>
                                     </div>
                                 </div>
