@@ -1,14 +1,39 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./slider.css";
-import { getText } from "../../i18n";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../context/AuthContext";
+import API_BASE_URL from "../../apiConfig";
 
 const Slider = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const trackRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalImages = 8; // Số lượng ảnh trong slider
+  const [cafes, setCafes] = useState([]);
+
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}users/preference/recommend`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId: user?.id }),
+        });
+        const data = await response.json();
+        setCafes(data);
+      } catch (error) {
+        console.error('Error fetching recommendations:', error);
+      }
+    };
+
+    if (user?.id) {
+      fetchRecommendations();
+    }
+  }, [user]);
 
   const handleWheel = (e) => {
     // Kiểm tra nếu chuột nằm trong vùng của #image-track
@@ -48,12 +73,12 @@ const Slider = () => {
 
     // Cập nhật currentIndex dựa trên percentage
     const percentage = parseFloat(trackRef.current?.dataset.percentage || "0");
-    const index = Math.round((percentage * -1) / (100 / (totalImages - 1)));
-    setCurrentIndex(Math.max(0, Math.min(index, totalImages - 1)));
+    const index = Math.round((percentage * -1) / (100 / (cafes.length - 1)));
+    setCurrentIndex(Math.max(0, Math.min(index, cafes.length - 1)));
   };
 
   const handleDotClick = (index) => {
-    const percentage = -(index * (100 / (totalImages - 1)));
+    const percentage = -(index * (100 / (cafes.length - 1)));
     trackRef.current.dataset.percentage = percentage;
     trackRef.current.style.transform = `translate(${percentage}%, -50%)`;
     setCurrentIndex(index);
@@ -77,7 +102,11 @@ const Slider = () => {
     return () => {
       trackElement.removeEventListener("wheel", handleWheelEvent);
     };
-  }, []);
+  }, [cafes]);
+
+  const handleCafeClick = (cafeId) => {
+    navigate(`/detail/${cafeId}`);
+  };
 
   return (
     <div id="slider-container">
@@ -85,7 +114,7 @@ const Slider = () => {
         <div id="slider-title">{t('recommended')}</div>
         <Link to="/favorite" className="favorite-link">
           <i className="fas fa-heart"></i>
-           {t('favorite')}
+          {t('favorite')}
         </Link>
       </div>
       <div
@@ -95,49 +124,25 @@ const Slider = () => {
         onWheel={handleWheel}
         style={{ overflow: "hidden" }}
       >
-        <img
-          className="image"
-          src="assets/image/caphegiang.jpg"
-          alt="Cà phê Giảng"
-        />
-        <img
-          className="image"
-          src="assets/image/coffeeshop.jpg"
-          alt="Coffee Shop"
-        />
-        <img
-          className="image"
-          src="assets/image/highlands1.jpg"
-          alt="Highlands 1"
-        />
-        <img
-          className="image"
-          src="assets/image/highlands2.jpg"
-          alt="Highlands 2"
-        />
-        <img
-          className="image"
-          src="assets/image/thecoffeehouse1.jpg"
-          alt="The coffee house 1"
-        />
-        <img
-          className="image"
-          src="assets/image/thecoffeehouse2.jpg"
-          alt="The coffee house 2"
-        />
-        <img
-          className="image"
-          src="assets/image/coffeeshop1.jpg"
-          alt="Coffee Shop 1"
-        />
-        <img
-          className="image"
-          src="assets/image/coffeeshop2.jpg"
-          alt="Coffee Shop 2"
-        />
+        {cafes.map((cafe, index) => (
+          <div key={cafe.id} className="slider-cafe-item" onClick={() => handleCafeClick(cafe.id)}>
+            <img
+              className="slider-image"
+              src={cafe.image_urls[0] || "assets/image/default-cafe.jpg"}
+              alt={cafe.name}
+            />
+            <div className="slider-cafe-info">
+              <h3>{cafe.name}</h3>
+              <div className="slider-rating">
+                <i className="fas fa-star"></i>
+                {cafe.google_rating}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
       <div className="slider-dots">
-        {[...Array(totalImages)].map((_, index) => (
+        {cafes.map((_, index) => (
           <div
             key={index}
             className={`dot ${index === currentIndex ? 'active' : ''}`}
